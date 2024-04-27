@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """
-Pascal triangle -> alx interview 
+Pascal triangle -> alx interview.
+
 """
 
 
 def pascal_triangle(n):
-    """Pass in a number n and return a list of lists representing the first n rows
-    of Pascal's Triangle."""
+    """ returns a list of lists of integers representing the Pascal triangle"""
+
     triangle = []
     if n > 0:
         triangle = [[1]]
