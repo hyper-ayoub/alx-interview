@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Pass in a number n and return a list of lists representing the first n rows of Pascal's Triangle.
+Pascal triangle -> alx interview 
 """
-
 def pascal_triangle(n):
     """Pass in a number n and return a list of lists representing the first n rows
     of Pascal's Triangle."""
