@@ -2,7 +2,6 @@
 
 # Pascal triangle
 
-
 def pascal_triangle(n):
     """Pass in a number n and return a list of lists representing the first n rows
     of Pascal's Triangle."""
