@@ -1,68 +1,39 @@
 #!/usr/bin/python3
-
-""" code """
+"""
+Log parsing -> requests
+"""
 
 import sys
-import signal
 
-# Initialize variables
-total_size = 0
-status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-line_count = 0
+if __name__ == '__main__':
 
-def print_statistics():
-    """Print the collected statistics."""
-    global total_size, status_codes
-    print(f"File size: {total_size}")
-    for code in sorted(status_codes.keys()):
-        if status_codes[code] > 0:
-            print(f"{code}: {status_codes[code]}")
+    filesize, count = 0, 0
+    codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
+    stats = {k: 0 for k in codes}
 
-def signal_handler(sig, frame):
-    """Handle keyboard interruption signal."""
-    print_statistics()
-    sys.exit(0)
+    def print_stats(stats: dict, file_size: int) -> None:
+        print("File size: {:d}".format(filesize))
+        for k, v in sorted(stats.items()):
+            if v:
+                print("{}: {}".format(k, v))
 
-# Register the signal handler for keyboard interruption
-signal.signal(signal.SIGINT, signal_handler)
-
-try:
-    for line in sys.stdin:
-        # Strip the line of leading/trailing whitespace
-        line = line.strip()
-        
-        # Split the line by spaces to parse the components
-        parts = line.split()
-        
-        # Check if the line format is correct
-        if len(parts) != 7:
-            continue
-        
-        ip_address, dash, date, request, http_version, status_code, file_size = parts
-        
-        # Validate and parse status code and file size
-        try:
-            status_code = int(status_code)
-            file_size = int(file_size)
-        except ValueError:
-            continue
-        
-        # Update total file size
-        total_size += file_size
-        
-        # Update the status code count if it's one of the expected ones
-        if status_code in status_codes:
-            status_codes[status_code] += 1
-        
-        # Increment the line count
-        line_count += 1
-        
-        # Every 10 lines, print the statistics
-        if line_count % 10 == 0:
-            print_statistics()
-
-except Exception as e:
-    # In case of an unexpected exception, print the statistics before exiting
-    print(f"An error occurred: {e}")
-    print_statistics()
-    sys.exit(1)
+    try:
+        for line in sys.stdin:
+            count += 1
+            data = line.split()
+            try:
+                status_code = data[-2]
+                if status_code in stats:
+                    stats[status_code] += 1
+            except BaseException:
+                pass
+            try:
+                filesize += int(data[-1])
+            except BaseException:
+                pass
+            if count % 10 == 0:
+                print_stats(stats, filesize)
+        print_stats(stats, filesize)
+    except KeyboardInterrupt:
+        print_stats(stats, filesize)
+        raise
