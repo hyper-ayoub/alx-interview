@@ -1,53 +1,68 @@
 #!/usr/bin/python3
+
 """ code """
 
-
 import sys
+import signal
 
-def parse_line(line):
-    """
-    Parses a log line and extracts relevant information.
-    Returns a tuple (status_code, file_size) or None if the line format is invalid.
-    """
-    try:
-        _, _, request, status_code, file_size = line.split('"')
-        _, _, method, path, _ = request.split()
-        if method == "GET" and path.startswith("/projects/260"):
-            return int(status_code), int(file_size)
-    except ValueError:
-        pass
-    return None
+# Initialize variables
+total_size = 0
+status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+line_count = 0
 
-def main():
-    total_size = 0
-    status_counts = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-    line_count = 0
+def print_statistics():
+    """Print the collected statistics."""
+    global total_size, status_codes
+    print(f"File size: {total_size}")
+    for code in sorted(status_codes.keys()):
+        if status_codes[code] > 0:
+            print(f"{code}: {status_codes[code]}")
 
-    try:
-        for line in sys.stdin:
-            parsed = parse_line(line.strip())
-            if parsed:
-                status_code, file_size = parsed
-                total_size += file_size
-                status_counts[status_code] += 1
-                line_count += 1
+def signal_handler(sig, frame):
+    """Handle keyboard interruption signal."""
+    print_statistics()
+    sys.exit(0)
 
-                if line_count % 10 == 0:
-                    print(f"Total file size: {total_size}")
-                    for code in sorted(status_counts.keys()):
-                        if status_counts[code] > 0:
-                            print(f"{code}: {status_counts[code]}")
-                    print()
+# Register the signal handler for keyboard interruption
+signal.signal(signal.SIGINT, signal_handler)
 
-    except KeyboardInterrupt:
-        # Handle CTRL+C interruption
-        pass
+try:
+    for line in sys.stdin:
+        # Strip the line of leading/trailing whitespace
+        line = line.strip()
+        
+        # Split the line by spaces to parse the components
+        parts = line.split()
+        
+        # Check if the line format is correct
+        if len(parts) != 7:
+            continue
+        
+        ip_address, dash, date, request, http_version, status_code, file_size = parts
+        
+        # Validate and parse status code and file size
+        try:
+            status_code = int(status_code)
+            file_size = int(file_size)
+        except ValueError:
+            continue
+        
+        # Update total file size
+        total_size += file_size
+        
+        # Update the status code count if it's one of the expected ones
+        if status_code in status_codes:
+            status_codes[status_code] += 1
+        
+        # Increment the line count
+        line_count += 1
+        
+        # Every 10 lines, print the statistics
+        if line_count % 10 == 0:
+            print_statistics()
 
-    # Print final statistics
-    print(f"Total file size: {total_size}")
-    for code in sorted(status_counts.keys()):
-        if status_counts[code] > 0:
-            print(f"{code}: {status_counts[code]}")
-
-if __name__ == "__main__":
-    main()
+except Exception as e:
+    # In case of an unexpected exception, print the statistics before exiting
+    print(f"An error occurred: {e}")
+    print_statistics()
+    sys.exit(1)
