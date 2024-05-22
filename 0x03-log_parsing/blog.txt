@@ -8,7 +8,7 @@
 (if the format is not this one, the line must be skipped)
 
 
-#after 10 line or (Ctrl +c ) print this statistics from the beginning
+# after 10 line or (Ctrl +c ) print this statistics from the beginning
 
 1:Total file size: File size: <total size>
 2:where <total size> is the sum of all previous <file size> (see input format above)
