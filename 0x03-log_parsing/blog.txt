@@ -1,0 +1,22 @@
+# go with the code
+# script that read stdin line by line
+
+# input format 
+<IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
+
+# condition of start
+(if the format is not this one, the line must be skipped)
+
+
+#after 10 line or (Ctrl +c ) print this statistics from the beginning
+
+1:Total file size: File size: <total size>
+2:where <total size> is the sum of all previous <file size> (see input format above)
+3 number of lines by status code
+! possible => possible status code: 200, 301, 400, 401, 403, 404, 405 and 500
+4:condition of code parsing
+if a status code doesn’t appear or is not an integer, don’t print anything for this status code
+5:format => <status code>: <number>
+
+# important
+status codes should be printed in ascending order
