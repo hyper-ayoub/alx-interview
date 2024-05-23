@@ -1,0 +1,20 @@
+# starting for this UTF-8 Validation
+
+# function 
+ def validUTF8(data)
+ 
+# setting
+ data
+ 
+# return statement
+True => 1 if( if data is a valid UTF-8 encoding)
+false => 0 else()
+
+! A character in UTF-8 can be 1 to 4 bytes long
+! The data set can contain multiple characters
+! The data will be represented by a list of integers
+
+=> Each integer represents 1 byte of data
+   => you only need to handle the 8 least significant bits of each integer
+
+# Enjoy
