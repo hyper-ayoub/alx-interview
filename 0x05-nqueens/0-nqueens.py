@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-"""
-This script solves the N-Queens problem for a given N.
-Usage: nqueens N
-N must be an integer greater or equal to 4.
-"""
+
+
+""" n-queen"""
 
 import sys
 
