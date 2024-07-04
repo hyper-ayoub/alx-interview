@@ -9,6 +9,7 @@ def solve_nqueens(n):
     col = set()
     posDiag = set()  # (r + c)
     negDiag = set()  # (r - c)
+
     
     res = []
     board = [["."] * n for _ in range(n)]
