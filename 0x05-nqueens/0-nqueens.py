@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-
-
 """ n-queen"""
-
 import sys
+
 
 def solve_nqueens(n):
     col = set()
