@@ -56,7 +56,13 @@ def main():
 
     solutions = solve_nqueens(N)
     for solution in solutions:
-        print(solution)
+        formatted_solution = []
+        for r in range(N):
+            for c in range(N):
+                if solution[r][c] == "Q":
+                    formatted_solution.append([r, c])
+        print(formatted_solution)
 
 if __name__ == "__main__":
     main()
+
