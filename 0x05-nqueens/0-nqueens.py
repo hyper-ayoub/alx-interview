@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+""" solution """
 import sys
 from typing import List
 
