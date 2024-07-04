@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 
 """ solution """
-import sys
-from typing import List
 
-class Solution:
+import sys
+
     def solveNQueens(self, n: int) -> List[List[str]]:
         col = set()
         posDiag = set()  # (r + c)
