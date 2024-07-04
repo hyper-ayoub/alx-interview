@@ -4,6 +4,7 @@
 
 import sys
 
+
 def solve_nqueens(n):
     col = set()
     posDiag = set()  # (r + c)
