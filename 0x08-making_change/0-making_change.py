@@ -18,5 +18,5 @@ def makeChange(coins, total):
             if j <= i:
                 but[i] = min(but[i], 1 + but[i - j])
 
-    # retunn statement
+    # return statement
     return but[total] if but[total] != total + 1 else -1
