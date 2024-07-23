@@ -1,7 +1,7 @@
 # 😒Making_change 
   ![image](https://github.com/user-attachments/assets/33642b58-4c3d-4486-8332-182a68a03a25) 
   ![problem-solving-skills](https://github.com/user-attachments/assets/4251a3b0-f93e-43e4-95e2-cc094e75226b) 
-
+  
 ### 🕹Coin change problem     
 For the “0. Change comes from within” project, you will tackle a classic problem from the domain of dynamic programming and greedy algorithms: the coin change problem. The objective is to find the minimum number of coins required to make up a given total amount, given a list of coin denominations. This project challenges you to apply your understanding of algorithms to devise a solution that is not only correct but also efficient. Below are the key concepts and resources necessary to complete this project successfully.
 
