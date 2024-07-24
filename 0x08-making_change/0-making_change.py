@@ -4,7 +4,7 @@
 
 
 def makeChange(coins, total):
-    # If total is zero or less, no coins are needed
+    # If total is zero, no coins are needed
     if total <= 0:
         return 0
     # using bottom up
