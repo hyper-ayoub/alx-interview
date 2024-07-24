@@ -5,7 +5,7 @@
 
 def makeChange(coins, total):
     # If total is zero, no coins are needed
-    if total == 0:
+    if total <= 0:
         return 0
     # using bottom up
 
