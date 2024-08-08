@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Prime Game leetcode challenge 
+Prime Game leetcode
 """
 
 
