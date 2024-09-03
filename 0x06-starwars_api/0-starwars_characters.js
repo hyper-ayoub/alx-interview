@@ -59,4 +59,3 @@ request(movieUrl, (err, _, body) => {
   // Execute function to fetch and print character names
   fetchCharacterNames();
 });
-
