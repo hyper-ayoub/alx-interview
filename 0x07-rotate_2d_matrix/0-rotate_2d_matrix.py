@@ -1,5 +1,6 @@
-"""Rotate an n x n 2D matrix 90 degrees clockwise."""
+#!/usr/bin/python3
 
+"""n x n 2D matrix, rotate it 90 degrees clockwise """
 
 # Function to rotate the matrix
 def rotate_2d_matrix(matrix):
